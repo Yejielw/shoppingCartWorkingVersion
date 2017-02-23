@@ -1,7 +1,20 @@
 var $shoppingCart = $(".shopping-cart");
 var $cartList = $(".cart-list");
 // an array with all of our cart items
-var cart = [];
+
+//local storage id
+  var STORAGE_ID = 'shoppingcart';
+
+//local storage functions
+  var saveToLocalStorage = function () {
+  localStorage.setItem(STORAGE_ID, JSON.stringify(cart));
+  }
+
+  var getFromLocalStorage = function () {
+    return JSON.parse(localStorage.getItem(STORAGE_ID) || '[]');
+  }
+
+  var cart = getFromLocalStorage();
 
 /*
 You should not have to touch the html file at all. 
@@ -26,6 +39,7 @@ var updateCart = function () {
     totalPrice+=cart[i].price*cart[i].tally;
   }
   $(".total").html(totalPrice);
+  saveToLocalStorage();
 }
 
 
@@ -45,6 +59,7 @@ var addItem = function (item) {
     "tally": 1,
     "totalPrice": item.price
   })
+  saveToLocalStorage();
 }
 
 var clearCart = function () {
@@ -53,6 +68,7 @@ var clearCart = function () {
   cart = [];
   total=0;
   $(".total").html(total);
+  saveToLocalStorage();
 }
 
 var removeItem = function (item) {
@@ -68,6 +84,7 @@ var removeItem = function (item) {
       return true;
     }
   } 
+  saveToLocalStorage();
 }
 
 $(".cart-list").on("click",".glyphicon", function () {
