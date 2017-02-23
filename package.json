@@ -1,0 +1,27 @@
+{
+  "name": "shoppingcart",
+  "version": "1.0.0",
+  "description": "for shopping!",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^3.3.6",
+    "express": "^4.14.1",
+    "font-awesome": "^4.5.0",
+    "handlebars": "^4.0.5",
+    "jquery": "^2.2.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brolak/shopping-cart.git"
+  },
+  "bugs": {
+    "url": "https://github.com/brolak/shopping-cart/issues"
+  },
+  "homepage": "https://github.com/brolak/shopping-cart#readme"
+}
