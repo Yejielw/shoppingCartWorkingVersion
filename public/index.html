@@ -8,7 +8,7 @@
   <title>Shopping Cart!</title>
   <script id="cart-template" type="text/x-handlebars-template">
       {{#each cart}}
-      <p>{{name}} ( {{tally}} ) - {{price}}</p>
+      <p data-name="{{name}}">{{name}} ({{tally}}) - ${{totalPrice}} <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></p>
       {{/each}}
   </script>
 
