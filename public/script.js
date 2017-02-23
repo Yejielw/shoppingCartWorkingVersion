@@ -23,7 +23,7 @@ var updateCart = function () {
   $cartList.append(newHTML);
   totalPrice = 0;
   for(i=0;i<cart.length;i++){
-    totalPrice+=Number(cart[i].price*cart[i].tally);
+    totalPrice+=cart[i].price*cart[i].tally;
   }
   $(".total").html(totalPrice);
 }
@@ -32,18 +32,18 @@ var updateCart = function () {
 var addItem = function (item) {
   //add items to cart array
   for(i=0;i<cart.length;i++){
-    if(cart[i].name === item.dataset.name){
+    if(cart[i].name === item.name){
       cart[i].tally += 1;
-      cart[i].totalPrice = cart[i].price*cart[i].tally;
+      cart[i].totalPrice = cart[i].price*Number(cart[i].tally);
       return true;
     }
 
   }
   cart.push({
-    "name": item.dataset.name,
-    "price": Number(item.dataset.price),
+    "name": item.name,
+    "price": Number(item.price),
     "tally": 1,
-    "totalPrice": Number(item.dataset.price*item.tally)
+    "totalPrice": item.price
   })
 }
 
@@ -59,6 +59,7 @@ var removeItem = function (item) {
   for(i=0;i<cart.length;i++) {
     if(cart[i].tally > 1 && cart[i].name === item[0].dataset.name){
       cart[i].tally--;
+      cart[i].totalPrice = cart[i].price*Number(cart[i].tally);
       updateCart();
       return true;
     } else if (cart[i].tally === 1 && cart[i].name === item[0].dataset.name){
@@ -82,7 +83,7 @@ $('.view-cart').on('click', function () {
 $('.row').on('click', '.add-to-cart', function () {
   //get the "item" object from the page
   $shoppingCart.toggleClass('show',true);
-  newItem = this.closest(".item")
+  newItem = $(this).closest(".item").data();
   addItem(newItem);
   updateCart();
 });
