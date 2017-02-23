@@ -43,7 +43,7 @@ var addItem = function (item) {
     "name": item.dataset.name,
     "price": Number(item.dataset.price),
     "tally": 1,
-    "totalPrice": Number(item.dataset.price)
+    "totalPrice": Number(item.dataset.price*item.tally)
   })
 }
 
@@ -54,6 +54,25 @@ var clearCart = function () {
   total=0;
   $(".total").html(total);
 }
+
+var removeItem = function (item) {
+  for(i=0;i<cart.length;i++) {
+    if(cart[i].tally > 1 && cart[i].name === item[0].dataset.name){
+      cart[i].tally--;
+      updateCart();
+      return true;
+    } else if (cart[i].tally === 1 && cart[i].name === item[0].dataset.name){
+      cart.splice(i,1);
+      updateCart();
+      return true;
+    }
+  } 
+}
+
+$(".cart-list").on("click",".glyphicon", function () {
+  deleteItem = $(this).parent();
+  removeItem(deleteItem);
+})
 
 $('.view-cart').on('click', function () {
   //display shopping cart on click
